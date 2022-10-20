@@ -3,9 +3,9 @@
 class Board
     attr_accessor :array
   
-    #initialize a blank board
     def initialize
       @array = []
+      
       for i in 0..8
         @array[i] = BoardCase.new
       end
@@ -13,23 +13,20 @@ class Board
   
     #methods to play the game with all prompt infos.
     def play_turn(player)
-      puts "\n\n" + "Voici l'état de la grille:"
+      puts "Voici l'état de la grille:"
       self.show
-      puts "\n" + "#{player.name}, c'est à ton tour!"
-      puts "\u{3030}"*12
-      puts "\nDans quelle case veux-tu te placer?"
-      print "\u{2b1c}> "
+      puts "#{player.name}, c'est à ton tour!"
+      puts "Dans quelle case veux-tu te placer?"
       choice = (gets.chomp.to_i) - 1
       if (choice > 9) || (choice.negative?)
-        puts "Option invalide!\u{1F6AB}\u{1F6AB}\u{1F6AB}\n\nEt voilà, un tour de perdu! \u{1F630}"
+        puts "Option invalide!"
       elsif array[choice].value != ' '
-        puts "Attention! La case est déjà prise! \u{1F6AB}\u{1F6AB}\u{1F6AB}\nBravo, tu passes ton tour! \u{1F630}"
+        puts "Attention! La case est déjà prise! Bravo, tu passes ton tour! {1F630}"
       else
         array[choice].value = player.value
-        puts "\nQuelle stratégie!!!\u{1F92F}"
+        puts "\nQuelle stratégie!!!"
       end
       puts ""
-      puts " "*6 + "\u{2716}\u{1F525}"*10 
     end
   
     def game_nul?
